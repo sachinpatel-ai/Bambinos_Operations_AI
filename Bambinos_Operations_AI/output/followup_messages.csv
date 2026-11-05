@@ -1,0 +1,9 @@
+faculty_form_id,invoice_id,student_id,reason_codes,decision,followup_message
+3301,84901,68101,ALREADY_SCHEDULED,MANUAL_REVIEW,"Hi Operations, this renewal requires manual review. Reason: ALREADY_SCHEDULED. Please investigate."
+3305,84905,68105,BATCH_CAPACITY_FULL,MANUAL_REVIEW,"Hi Operations, the requested batch has reached its capacity. Please check available alternative batches."
+3308,84908,68108,DUPLICATE_RENEWAL_FORM,MANUAL_REVIEW,"Hi Operations, duplicate renewal submissions were detected. Please review and retain only the valid request."
+3309,84908,68108,DUPLICATE_RENEWAL_FORM,MANUAL_REVIEW,"Hi Operations, duplicate renewal submissions were detected. Please review and retain only the valid request."
+3310,84909,68109,PAYMENT_NOT_COMPLETED|PAYMENT_AMOUNT_MISMATCH,MANUAL_REVIEW,"Hi Parent, we could not confirm the renewal payment. Please verify the payment status with the Operations team."
+3311,84911,68111,PAYMENT_NOT_COMPLETED,MANUAL_REVIEW,"Hi Parent, we could not confirm the renewal payment. Please verify the payment status with the Operations team."
+3312,84912,68112,BATCH_CHANGE_REQUIRED,MANUAL_REVIEW,"Hi Parent, we received your batch change request. Operations will check available batches and confirm the schedule."
+3313,84931,68113,INVOICE_NOT_FOUND,MANUAL_REVIEW,"Hi Teacher, the invoice linked to this renewal could not be found. Please submit the correct invoice."

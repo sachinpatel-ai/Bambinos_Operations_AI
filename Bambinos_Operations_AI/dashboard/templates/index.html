@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Renewal Reconciliation | Bambinos.live Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+  <div id="loading" class="loading" role="status" aria-live="polite">
+    <div class="spinner"></div><span>Loading reconciliation results…</span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">B</div>
+      <div>
+        <strong>Bambinos.live</strong>
+        <small>Renewal reconciliation</small>
+      </div>
+    </div>
+    <nav id="nav" aria-label="Sections">
+      <a href="#overview" class="active">Overview</a>
+      <a href="#approved">Auto-Approved</a>
+      <a href="#exceptions">Flagged Exceptions</a>
+      <a href="#messages">Follow-up Messages</a>
+    </nav>
+    <p class="sidebar-note">Reads <code>output/*.csv</code> written by the reconciliation scripts. Messages are drafts only; nothing is sent.</p>
+  </aside>
+
+  <main class="content">
+    <header class="topbar" id="overview">
+      <div class="title-block">
+        <h1>Renewal Operations</h1>
+        <p class="muted"><span id="clock">--</span> <span class="sep">|</span> Data last updated: <span id="last-updated">--</span></p>
+      </div>
+      <div class="controls">
+        <input id="global-search" class="search" type="search" placeholder="Search student, invoice, batch or reason…" aria-label="Search all tables">
+        <button id="refresh-btn" class="btn" type="button">Refresh</button>
+      </div>
+    </header>
+
+    <div id="error-banner" class="banner error" role="alert" hidden></div>
+    <div id="file-banner" class="banner warn" hidden></div>
+
+    <div class="filter-row">
+      <label for="reason-filter">Exception reason</label>
+      <select id="reason-filter"><option value="">All reasons</option></select>
+      <span class="muted small">Applies to exceptions, messages and charts. Search applies everywhere.</span>
+    </div>
+
+    <section class="kpis" aria-label="Key metrics">
+      <article class="kpi"><span class="kpi-label">Total records processed</span><strong id="kpi-total">--</strong></article>
+      <article class="kpi ok"><span class="kpi-label">Auto-approved entries</span><strong id="kpi-approved">--</strong></article>
+      <article class="kpi warn"><span class="kpi-label">Flagged exceptions</span><strong id="kpi-flagged">--</strong></article>
+      <article class="kpi"><span class="kpi-label">Approval rate</span><strong id="kpi-rate">--</strong></article>
+      <article class="kpi"><span class="kpi-label">Follow-up messages generated</span><strong id="kpi-messages">--</strong></article>
+    </section>
+
+    <section class="charts" aria-label="Charts">
+      <article class="panel">
+        <h2>Auto-Approved vs Flagged</h2>
+        <div class="chart-box"><canvas id="chart-split"></canvas></div>
+        <p class="chart-empty muted small" id="empty-split" hidden>No records match the current filters.</p>
+      </article>
+      <article class="panel">
+        <h2>Exceptions by reason code</h2>
+        <div class="chart-box"><canvas id="chart-reasons"></canvas></div>
+        <p class="chart-empty muted small" id="empty-reasons" hidden>No exceptions match the current filters.</p>
+      </article>
+      <article class="panel">
+        <h2>Approval status distribution</h2>
+        <div class="chart-box"><canvas id="chart-decisions"></canvas></div>
+        <p class="chart-empty muted small" id="empty-decisions" hidden>No records match the current filters.</p>
+      </article>
+    </section>
+
+    <section class="panel table-panel" id="approved">
+      <div class="panel-head">
+        <h2>Auto-Approved <span class="count" id="approved-count">0</span></h2>
+        <a class="btn ghost" href="/download/auto_approved.csv" download>Download CSV</a>
+      </div>
+      <div class="table-wrap"><table><thead id="approved-head"></thead><tbody id="approved-body"></tbody></table></div>
+      <div class="pager" id="approved-pager"></div>
+    </section>
+
+    <section class="panel table-panel" id="exceptions">
+      <div class="panel-head">
+        <h2>Flagged Exceptions <span class="count" id="exceptions-count">0</span></h2>
+        <a class="btn ghost" href="/download/flagged_exceptions.csv" download>Download CSV</a>
+      </div>
+      <div class="table-wrap"><table><thead id="exceptions-head"></thead><tbody id="exceptions-body"></tbody></table></div>
+      <div class="pager" id="exceptions-pager"></div>
+    </section>
+
+    <section class="panel table-panel" id="messages">
+      <div class="panel-head">
+        <h2>Follow-up Messages <span class="count" id="messages-count">0</span></h2>
+        <a class="btn ghost" href="/download/followup_messages.csv" download>Download CSV</a>
+      </div>
+      <div class="table-wrap"><table><thead id="messages-head"></thead><tbody id="messages-body"></tbody></table></div>
+      <div class="pager" id="messages-pager"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
+</html>

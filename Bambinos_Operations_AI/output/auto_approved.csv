@@ -1,0 +1,5 @@
+faculty_form_id,invoice_id,student_id,class_id,educator_id,classbatch_id,preferred_days,preferred_time,decision
+3302,84902,68102,205,1108,9202,"Mon,Wed",18:00:00,READY_FOR_SCHEDULING
+3303,84903,68103,301,1115,9203,"Wed,Fri",16:30:00,READY_FOR_SCHEDULING
+3304,84904,68104,104,1102,9201,"Tue,Thu",17:00:00,READY_FOR_SCHEDULING
+3307,84907,68107,101,1125,9207,"Mon,Thu",15:30:00,READY_FOR_SCHEDULING
